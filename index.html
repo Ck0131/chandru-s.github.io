@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chandru S | Power BI Developer</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:#05080f;color:#f0f6ff;font-family:'Outfit',sans-serif;font-weight:300;overflow-x:hidden}
+::-webkit-scrollbar{width:3px}
+::-webkit-scrollbar-thumb{background:#3b82f6;border-radius:3px}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:18px 48px;background:rgba(5,8,15,0.92);backdrop-filter:blur(20px);border-bottom:1px solid #1e2d45}
+.logo{font-family:'Bebas Neue';font-size:22px;letter-spacing:2px;background:linear-gradient(135deg,#3b82f6,#06b6d4);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.nav-links{display:flex;gap:28px;list-style:none}
+.nav-links a{font-family:'JetBrains Mono';font-size:11px;color:#6b7fa3;text-decoration:none;letter-spacing:1.5px;text-transform:uppercase;transition:color .2s}
+.nav-links a:hover{color:#06b6d4}
+.nav-btn{padding:8px 22px;background:#3b82f6;color:#fff;border-radius:7px;font-size:13px;font-weight:500;text-decoration:none;transition:opacity .2s}
+.nav-btn:hover{opacity:0.85}
+
+/* HERO */
+#hero{min-height:100vh;display:flex;align-items:center;padding:100px 48px 60px;position:relative;overflow:hidden}
+#hero::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(90deg,transparent,transparent 59px,rgba(59,130,246,0.04) 60px),repeating-linear-gradient(0deg,transparent,transparent 59px,rgba(59,130,246,0.04) 60px)}
+.hero-inner{max-width:900px;position:relative;z-index:1}
+.hero-chip{display:inline-flex;align-items:center;gap:8px;padding:6px 16px;border-radius:100px;border:1px solid rgba(16,185,129,0.4);background:rgba(16,185,129,0.08);font-family:'JetBrains Mono';font-size:10px;letter-spacing:2px;color:#10b981;text-transform:uppercase;margin-bottom:32px}
+.chip-dot{width:7px;height:7px;border-radius:50%;background:#10b981;animation:blink 1.8s ease-in-out infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0.2}}
+h1{font-family:'Bebas Neue';font-size:clamp(70px,12vw,140px);line-height:0.88;letter-spacing:-1px;margin-bottom:24px}
+h1 .c1{color:#f0f6ff}
+h1 .c2{color:#3b82f6}
+h1 .c3{color:#06b6d4}
+.hero-role{font-family:'JetBrains Mono';font-size:14px;color:#06b6d4;margin-bottom:20px;letter-spacing:1px}
+.hero-bio{font-size:16px;color:#6b7fa3;line-height:1.85;max-width:580px;margin-bottom:40px}
+.hero-bio strong{color:#f0f6ff;font-weight:500}
+.hero-btns{display:flex;gap:14px;flex-wrap:wrap}
+.btn-p{padding:14px 32px;background:#3b82f6;color:#fff;border-radius:8px;font-size:14px;font-weight:500;text-decoration:none;transition:box-shadow .25s,transform .2s}
+.btn-p:hover{transform:translateY(-2px);box-shadow:0 0 40px rgba(59,130,246,0.5)}
+.btn-s{padding:14px 32px;border:1px solid #1e2d45;color:#f0f6ff;border-radius:8px;font-size:14px;text-decoration:none;transition:border-color .2s}
+.btn-s:hover{border-color:#3b82f6}
+
+/* STATS BAR */
+.stats-bar{background:#0b1120;border-top:1px solid #1e2d45;border-bottom:1px solid #1e2d45;padding:32px 48px;display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+.stat-item{text-align:center}
+.stat-num{font-family:'Bebas Neue';font-size:52px;line-height:1}
+.stat-num.blue{color:#3b82f6}
+.stat-num.green{color:#10b981}
+.stat-num.amber{color:#f59e0b}
+.stat-num.cyan{color:#06b6d4}
+.stat-lbl{font-family:'JetBrains Mono';font-size:10px;color:#6b7fa3;letter-spacing:1.5px;text-transform:uppercase;margin-top:5px}
+
+/* SECTIONS */
+section.light{padding:88px 48px;background:#05080f}
+section.dark{padding:88px 48px;background:#0b1120}
+.eyebrow{font-family:'JetBrains Mono';font-size:10px;letter-spacing:3px;color:#3b82f6;text-transform:uppercase;margin-bottom:12px;display:flex;align-items:center;gap:10px}
+.eyebrow::before{content:'';width:24px;height:1px;background:#3b82f6}
+.sec-title{font-family:'Bebas Neue';font-size:clamp(40px,6vw,68px);line-height:0.95;letter-spacing:-1px;margin-bottom:52px}
+.sec-title em{color:#3b82f6;font-style:normal}
+
+/* ABOUT */
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:start}
+.about-text p{font-size:15px;color:#6b7fa3;line-height:1.9;margin-bottom:16px}
+.about-text strong{color:#f0f6ff}
+.pills{display:flex;flex-wrap:wrap;gap:9px;margin-top:24px}
+.pill{font-family:'JetBrains Mono';font-size:10px;padding:5px 13px;border-radius:100px;border:1px solid #1e2d45;color:#6b7fa3;background:#111827}
+.cards-col{display:flex;flex-direction:column;gap:13px}
+.info-card{background:#111827;border:1px solid #1e2d45;border-radius:13px;padding:20px;display:flex;gap:15px;align-items:flex-start;transition:border-color .3s,transform .3s}
+.info-card:hover{border-color:rgba(59,130,246,0.4);transform:translateX(5px)}
+.ic-ico{width:42px;height:42px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0}
+.ib{background:rgba(59,130,246,0.15)}
+.ig{background:rgba(16,185,129,0.15)}
+.ia{background:rgba(245,158,11,0.15)}
+.ir{background:rgba(244,63,94,0.1)}
+.info-card h4{font-size:13px;font-weight:600;color:#f0f6ff;margin-bottom:4px}
+.info-card p{font-size:12px;color:#6b7fa3;line-height:1.6}
+
+/* SKILLS */
+.skills-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.sk-card{background:#111827;border:1px solid #1e2d45;border-radius:15px;padding:24px;transition:transform .3s,border-color .3s;position:relative;overflow:hidden}
+.sk-card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;transform:scaleX(0);transform-origin:left;transition:transform .35s}
+.sk-card:hover{transform:translateY(-4px)}
+.sk-card:hover::after{transform:scaleX(1)}
+.sk-card.cb::after{background:#3b82f6}.sk-card.cc::after{background:#06b6d4}
+.sk-card.cg::after{background:#10b981}.sk-card.ca::after{background:#f59e0b}
+.sk-card.cr::after{background:#f43f5e}.sk-card.cp::after{background:#a855f7}
+.sk-head{display:flex;align-items:center;gap:10px;margin-bottom:16px}
+.sk-ico{font-size:20px}
+.sk-name{font-size:14px;font-weight:600}
+.tags{display:flex;flex-wrap:wrap;gap:7px}
+.tag{font-family:'JetBrains Mono';font-size:10px;padding:4px 10px;border-radius:100px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.07);color:#6b7fa3}
+
+/* EXPERIENCE TABS */
+.exp-wrap{display:grid;grid-template-columns:240px 1fr;gap:0}
+.exp-tabs{border-right:1px solid #1e2d45;padding-right:32px;display:flex;flex-direction:column;gap:8px}
+.exp-tab{padding:15px 18px;border-radius:9px;cursor:pointer;transition:background .2s;border:1px solid transparent}
+.exp-tab:hover{background:rgba(255,255,255,0.03)}
+.exp-tab.active{background:rgba(59,130,246,0.1);border-color:rgba(59,130,246,0.25)}
+.exp-tab-title{font-size:14px;font-weight:500;color:#f0f6ff}
+.exp-tab-co{font-family:'JetBrains Mono';font-size:10px;color:#3b82f6;margin-top:3px}
+.exp-tab-date{font-family:'JetBrains Mono';font-size:9px;color:#6b7fa3;margin-top:2px}
+.exp-body{padding-left:48px}
+.exp-panel{display:none}
+.exp-panel.active{display:block}
+.exp-role{font-family:'Bebas Neue';font-size:38px;line-height:1;letter-spacing:-0.5px;margin-bottom:3px}
+.exp-co{font-size:14px;color:#06b6d4;font-weight:500;margin-bottom:20px}
+.exp-list{list-style:none;display:flex;flex-direction:column;gap:12px}
+.exp-list li{font-size:14px;color:#6b7fa3;line-height:1.75;padding-left:20px;position:relative}
+.exp-list li::before{content:'▸';position:absolute;left:0;top:3px;color:#3b82f6;font-size:10px}
+.exp-list strong{color:#f0f6ff}
+.exp-tag-row{display:flex;flex-wrap:wrap;gap:7px;margin-top:22px}
+.exp-tag{font-family:'JetBrains Mono';font-size:10px;padding:4px 11px;border-radius:100px;background:rgba(59,130,246,0.1);border:1px solid rgba(59,130,246,0.2);color:#3b82f6}
+
+/* PROJECTS */
+.proj-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.proj-card{background:#111827;border:1px solid #1e2d45;border-radius:17px;overflow:hidden;display:flex;flex-direction:column;transition:transform .3s,border-color .3s,box-shadow .3s}
+.proj-card:hover{transform:translateY(-7px);border-color:rgba(59,130,246,0.35);box-shadow:0 20px 60px rgba(0,0,0,0.5)}
+.proj-top{padding:22px 22px 0;display:flex;justify-content:space-between;align-items:start}
+.proj-ico{width:46px;height:46px;border-radius:11px;display:flex;align-items:center;justify-content:center;font-size:22px}
+.pbadge{font-family:'JetBrains Mono';font-size:9px;padding:3px 10px;border-radius:100px;letter-spacing:1px;text-transform:uppercase}
+.pb{background:rgba(59,130,246,0.12);color:#3b82f6;border:1px solid rgba(59,130,246,0.25)}
+.pm{background:rgba(16,185,129,0.12);color:#10b981;border:1px solid rgba(16,185,129,0.25)}
+.pd{background:rgba(245,158,11,0.12);color:#f59e0b;border:1px solid rgba(245,158,11,0.25)}
+.pr{background:rgba(244,63,94,0.1);color:#f43f5e;border:1px solid rgba(244,63,94,0.2)}
+.ppu{background:rgba(168,85,247,0.12);color:#a855f7;border:1px solid rgba(168,85,247,0.25)}
+.proj-body{padding:16px 22px 20px;flex:1;display:flex;flex-direction:column}
+.proj-title{font-size:16px;font-weight:600;color:#f0f6ff;margin-bottom:9px}
+.proj-desc{font-size:12px;color:#6b7fa3;line-height:1.75;flex:1}
+.proj-stack{display:flex;flex-wrap:wrap;gap:6px;margin-top:16px}
+.sp{font-family:'JetBrains Mono';font-size:9px;padding:3px 8px;border-radius:100px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.07);color:#6b7fa3}
+.proj-foot{padding:13px 22px;border-top:1px solid #1e2d45}
+.proj-link{font-family:'JetBrains Mono';font-size:10px;color:#3b82f6;text-decoration:none;transition:color .2s,letter-spacing .2s}
+.proj-link:hover{color:#06b6d4;letter-spacing:1px}
+
+/* CERTS */
+.certs-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.cert-card{background:#111827;border:1px solid #1e2d45;border-radius:15px;padding:24px;display:flex;gap:16px;transition:border-color .3s,transform .3s}
+.cert-card:hover{border-color:rgba(16,185,129,0.4);transform:translateX(5px)}
+.cert-badge-ico{width:50px;height:50px;border-radius:11px;background:rgba(16,185,129,0.08);display:flex;align-items:center;justify-content:center;font-size:26px;flex-shrink:0}
+.cert-iss{font-family:'JetBrains Mono';font-size:9px;color:#10b981;letter-spacing:1px;text-transform:uppercase;margin-bottom:5px}
+.cert-name{font-size:13px;font-weight:600;color:#f0f6ff;margin-bottom:5px;line-height:1.4}
+.cert-info{font-size:11px;color:#6b7fa3;line-height:1.5}
+
+/* EDUCATION */
+.edu-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.edu-card{background:#111827;border:1px solid #1e2d45;border-radius:15px;padding:28px;transition:border-color .3s}
+.edu-card:hover{border-color:#3b82f6}
+.edu-yr{font-family:'JetBrains Mono';font-size:10px;color:#3b82f6;letter-spacing:2px;margin-bottom:11px}
+.edu-deg{font-size:17px;font-weight:700;color:#f0f6ff;margin-bottom:7px;line-height:1.3}
+.edu-school{font-size:12px;color:#6b7fa3;line-height:1.5}
+
+/* CONTACT */
+#contact{padding:88px 48px;text-align:center;background:#0b1120}
+.contact-sub{font-size:16px;color:#6b7fa3;max-width:480px;margin:16px auto 48px;line-height:1.75}
+.contact-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;max-width:760px;margin:0 auto 40px;text-align:left}
+.c-card{background:#111827;border:1px solid #1e2d45;border-radius:14px;padding:26px;transition:border-color .3s,transform .3s;text-decoration:none;color:inherit;display:block}
+.c-card:hover{border-color:#3b82f6;transform:translateY(-5px)}
+.c-ico{font-size:26px;margin-bottom:13px;display:block}
+.c-card h4{font-size:14px;font-weight:600;color:#f0f6ff;margin-bottom:5px}
+.c-card p{font-size:12px;color:#6b7fa3}
+.cta-row{display:flex;justify-content:center;gap:14px;flex-wrap:wrap}
+
+/* FOOTER */
+footer{padding:26px 48px;border-top:1px solid #1e2d45;display:flex;justify-content:space-between;align-items:center;background:#05080f}
+footer span{font-family:'JetBrains Mono';font-size:11px;color:#6b7fa3}
+footer .fl{color:#3b82f6}
+
+/* REVEAL */
+.rv{opacity:0;transform:translateY(26px);transition:opacity .65s ease,transform .65s ease}
+.rv.on{opacity:1;transform:translateY(0)}
+
+@media(max-width:900px){
+  nav{padding:15px 20px}
+  .nav-links{display:none}
+  section.light,section.dark,#contact{padding:64px 20px}
+  #hero{padding:90px 20px 50px}
+  .stats-bar{grid-template-columns:repeat(2,1fr);padding:28px 20px}
+  .about-grid,.exp-wrap,.skills-grid,.proj-grid,.certs-grid,.edu-grid,.contact-grid{grid-template-columns:1fr}
+  .exp-tabs{border-right:none;border-bottom:1px solid #1e2d45;padding-right:0;padding-bottom:20px;flex-direction:row;flex-wrap:wrap}
+  .exp-body{padding-left:0;padding-top:28px}
+  footer{flex-direction:column;gap:8px;text-align:center;padding:20px}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="logo">Chandru S.</div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#certifications">Certs</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a href="mailto:chandrus0131@gmail.com" class="nav-btn">Hire Me</a>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-inner">
+    <div class="hero-chip"><span class="chip-dot"></span>Open to IT Roles — Coimbatore</div>
+    <h1>
+      <span class="c1">CHAN</span><span class="c2">DRU</span><br>
+      <span class="c3">S.</span>
+    </h1>
+    <p class="hero-role">// Power BI Developer &amp; Data Analyst</p>
+    <p class="hero-bio">
+      <strong>Microsoft PL-300 Certified.</strong> I build dashboards that turn messy data into clear decisions — and I've trained 50+ professionals to do the same. 1+ year of real-world BI experience. Ready for a full-time IT role.
+    </p>
+    <div class="hero-btns">
+      <a href="#projects" class="btn-p">View My Work</a>
+      <a href="#contact" class="btn-s">Get in Touch →</a>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats-bar">
+  <div class="stat-item">
+    <div class="stat-num blue" id="s1">0</div>
+    <div class="stat-lbl">Professionals Trained</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-num green" id="s2">0</div>
+    <div class="stat-lbl">Dashboards Built</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-num amber" id="s3">0</div>
+    <div class="stat-lbl">Certifications</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-num cyan">1yr+</div>
+    <div class="stat-lbl">BI Experience</div>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section id="about" class="dark">
+  <p class="eyebrow rv">About</p>
+  <h2 class="sec-title rv">Who I <em>Am</em></h2>
+  <div class="about-grid">
+    <div class="about-text rv">
+      <p>I'm a <strong>Power BI Developer and Data Analyst</strong> from Coimbatore. I've spent the past year building dashboards, training professionals, and connecting raw data to real business decisions.</p>
+      <p>My foundation is a <strong>B.Tech in AI &amp; Data Science</strong>. Since graduating I've trained <strong>50+ professionals</strong> at G-Tec Academy and deployed real BI solutions at The Institute of Advanced Computing — cutting reporting time by 60%, processing 50,000+ records, and building secure multi-user dashboards.</p>
+      <p>Now I'm making the move into a <strong>full-time IT role</strong> as a Power BI Developer or Data Analyst. I bring deep technical knowledge, a teaching mindset, and a clear eye for what data needs to show.</p>
+      <div class="pills">
+        <span class="pill">Power BI</span><span class="pill">DAX</span>
+        <span class="pill">Power Query</span><span class="pill">SQL Server</span>
+        <span class="pill">Python</span><span class="pill">ML</span>
+        <span class="pill">Data Modeling</span><span class="pill">RLS</span>
+        <span class="pill">Microsoft Fabric</span>
+      </div>
+    </div>
+    <div class="cards-col rv">
+      <div class="info-card">
+        <div class="ic-ico ib">📊</div>
+        <div><h4>Dashboard Builder</h4><p>5+ production Power BI dashboards covering sales, HR, and marketing with advanced DAX, dynamic KPIs, and Row-Level Security.</p></div>
+      </div>
+      <div class="info-card">
+        <div class="ic-ico ig">🎓</div>
+        <div><h4>BI Trainer</h4><p>Designed PL-300-aligned curriculum. Mentored 50+ learners through 10+ real-world case studies at G-Tec Academy.</p></div>
+      </div>
+      <div class="info-card">
+        <div class="ic-ico ia">🤖</div>
+        <div><h4>ML Engineer</h4><p>Built classification and regression models in Python (scikit-learn), connecting ML outputs back to Power BI dashboards.</p></div>
+      </div>
+      <div class="info-card">
+        <div class="ic-ico ir">📝</div>
+        <div><h4>Published Researcher</h4><p>Research paper published on Wireless Communication Through Reconfigurable Intelligent Surface technology.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills" class="light">
+  <p class="eyebrow rv">Skills</p>
+  <h2 class="sec-title rv">Tech <em>Stack</em></h2>
+  <div class="skills-grid">
+    <div class="sk-card cb rv">
+      <div class="sk-head"><span class="sk-ico">📊</span><span class="sk-name">Business Intelligence</span></div>
+      <div class="tags"><span class="tag">Power BI Desktop</span><span class="tag">Power BI Service</span><span class="tag">Report Builder</span><span class="tag">Microsoft Fabric</span><span class="tag">OneLake</span><span class="tag">Dataflows</span></div>
+    </div>
+    <div class="sk-card cc rv">
+      <div class="sk-head"><span class="sk-ico">⚡</span><span class="sk-name">DAX &amp; Power Query</span></div>
+      <div class="tags"><span class="tag">CALCULATE</span><span class="tag">FILTER / ALL</span><span class="tag">RANKX</span><span class="tag">Time Intelligence</span><span class="tag">ALLEXCEPT</span><span class="tag">M Language</span></div>
+    </div>
+    <div class="sk-card ca rv">
+      <div class="sk-head"><span class="sk-ico">🗄️</span><span class="sk-name">Databases &amp; SQL</span></div>
+      <div class="tags"><span class="tag">SQL Server</span><span class="tag">MySQL</span><span class="tag">Joins &amp; CTEs</span><span class="tag">Window Functions</span><span class="tag">Stored Procedures</span><span class="tag">Star Schema</span></div>
+    </div>
+    <div class="sk-card cg rv">
+      <div class="sk-head"><span class="sk-ico">🐍</span><span class="sk-name">Python</span></div>
+      <div class="tags"><span class="tag">pandas</span><span class="tag">matplotlib</span><span class="tag">scikit-learn</span><span class="tag">NumPy</span><span class="tag">EDA</span><span class="tag">Feature Engineering</span></div>
+    </div>
+    <div class="sk-card cr rv">
+      <div class="sk-head"><span class="sk-ico">🧠</span><span class="sk-name">Machine Learning</span></div>
+      <div class="tags"><span class="tag">Random Forest</span><span class="tag">Classification</span><span class="tag">Regression</span><span class="tag">Model Evaluation</span><span class="tag">Hypertuning</span><span class="tag">Confusion Matrix</span></div>
+    </div>
+    <div class="sk-card cp rv">
+      <div class="sk-head"><span class="sk-ico">☁️</span><span class="sk-name">Cloud &amp; Tools</span></div>
+      <div class="tags"><span class="tag">Microsoft Azure</span><span class="tag">AWS Cloud</span><span class="tag">Row-Level Security</span><span class="tag">Incremental Refresh</span><span class="tag">Git</span><span class="tag">MS Excel</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience" class="dark">
+  <p class="eyebrow rv">Experience</p>
+  <h2 class="sec-title rv">Work <em>History</em></h2>
+  <div class="exp-wrap rv">
+    <div class="exp-tabs">
+      <div class="exp-tab active" onclick="switchExp(0,this)">
+        <div class="exp-tab-title">Power BI Trainer</div>
+        <div class="exp-tab-co">G-Tec Academy</div>
+        <div class="exp-tab-date">Sep 2024 — Present</div>
+      </div>
+      <div class="exp-tab" onclick="switchExp(1,this)">
+        <div class="exp-tab-title">Data Analyst</div>
+        <div class="exp-tab-co">Inst. of Adv. Computing</div>
+        <div class="exp-tab-date">Jun 2024 — Aug 2025</div>
+      </div>
+    </div>
+    <div class="exp-body">
+      <div class="exp-panel active" id="ep0">
+        <div class="exp-role">Power BI Trainer</div>
+        <div class="exp-co">G-Tec Academy · Coimbatore</div>
+        <ul class="exp-list">
+          <li>Designed and delivered <strong>end-to-end Power BI training programs</strong> covering data modeling, DAX, Power Query, and Power BI Service deployment.</li>
+          <li>Created <strong>10+ real-world case studies</strong> (sales analytics, HR dashboards, financial reporting) bridging theory with industry BI workflows.</li>
+          <li>Mentored <strong>50+ professionals and students</strong>, guiding them to build interactive reports and optimise data models for real query loads.</li>
+          <li>Developed curriculum <strong>aligned to PL-300 syllabus</strong> with hands-on labs for Row-Level Security and incremental refresh.</li>
+        </ul>
+        <div class="exp-tag-row"><span class="exp-tag">Power BI</span><span class="exp-tag">DAX</span><span class="exp-tag">Power Query</span><span class="exp-tag">RLS</span><span class="exp-tag">PL-300</span></div>
+      </div>
+      <div class="exp-panel" id="ep1">
+        <div class="exp-role">Data Analyst</div>
+        <div class="exp-co">The Institute of Advanced Computing · Coimbatore</div>
+        <ul class="exp-list">
+          <li>Designed and deployed <strong>5+ interactive Power BI dashboards</strong> for marketing and sales teams, reducing manual reporting time by <strong>60%</strong>.</li>
+          <li>Performed data cleaning and transformation using Power Query and DAX, processing <strong>50,000+ records</strong> with high data integrity.</li>
+          <li>Wrote <strong>optimised SQL queries</strong> (joins, CTEs, window functions) against SQL Server databases to feed dashboard layers.</li>
+          <li>Conducted statistical analysis in <strong>Python (pandas, matplotlib)</strong> to identify sales trends and improve marketing campaign targeting.</li>
+        </ul>
+        <div class="exp-tag-row"><span class="exp-tag">Power BI</span><span class="exp-tag">SQL Server</span><span class="exp-tag">Python</span><span class="exp-tag">pandas</span><span class="exp-tag">DAX</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects" class="light">
+  <p class="eyebrow rv">Projects</p>
+  <h2 class="sec-title rv">What I've <em>Built</em></h2>
+  <div class="proj-grid">
+    <div class="proj-card rv">
+      <div class="proj-top"><div class="proj-ico" style="background:rgba(59,130,246,0.15)">📊</div><span class="pbadge pb">Power BI</span></div>
+      <div class="proj-body">
+        <div class="proj-title">Sales Performance Dashboard</div>
+        <div class="proj-desc">End-to-end analytics covering $22M+ in transactions across 6 countries and 5,000+ records. YTD, MoM growth, profit margin %, and RANKX-based ranking. Row-Level Security for per-region access.</div>
+        <div class="proj-stack"><span class="sp">Power BI</span><span class="sp">DAX</span><span class="sp">Power Query</span><span class="sp">SQL Server</span><span class="sp">RLS</span></div>
+      </div>
+      <div class="proj-foot"><a href="#" class="proj-link">View Dashboard →</a></div>
+    </div>
+    <div class="proj-card rv">
+      <div class="proj-top"><div class="proj-ico" style="background:rgba(16,185,129,0.15)">🤖</div><span class="pbadge pm">ML / Python</span></div>
+      <div class="proj-body">
+        <div class="proj-title">Customer Churn Prediction</div>
+        <div class="proj-desc">Random Forest classifier predicting customer churn at 87% accuracy. Risk segments and feature importance visualised inside a Power BI dashboard connected directly to the Python model output.</div>
+        <div class="proj-stack"><span class="sp">Python</span><span class="sp">scikit-learn</span><span class="sp">pandas</span><span class="sp">Power BI</span><span class="sp">Random Forest</span></div>
+      </div>
+      <div class="proj-foot"><a href="#" class="proj-link">View Project →</a></div>
+    </div>
+    <div class="proj-card rv">
+      <div class="proj-top"><div class="proj-ico" style="background:rgba(245,158,11,0.15)">👥</div><span class="pbadge pd">Analytics</span></div>
+      <div class="proj-body">
+        <div class="proj-title">HR Analytics Dashboard</div>
+        <div class="proj-desc">Tracks headcount, attrition, department performance, and tenure trends. Advanced DAX (CALCULATE, FILTER, ALLEXCEPT) for dynamic KPIs with slicer-driven context switching across departments.</div>
+        <div class="proj-stack"><span class="sp">Power BI</span><span class="sp">DAX</span><span class="sp">Excel</span><span class="sp">Data Modeling</span></div>
+      </div>
+      <div class="proj-foot"><a href="#" class="proj-link">View Dashboard →</a></div>
+    </div>
+    <div class="proj-card rv">
+      <div class="proj-top"><div class="proj-ico" style="background:rgba(6,182,212,0.15)">📈</div><span class="pbadge pb">Power BI</span></div>
+      <div class="proj-body">
+        <div class="proj-title">G TEC Sales Analysis Report</div>
+        <div class="proj-desc">Full Power BI report from a 7-sheet Excel workbook. Pivot tables by segment and country, year-on-year comparison ($22.3M total), enriched columns with Profit % and interactive slicers.</div>
+        <div class="proj-stack"><span class="sp">Power BI</span><span class="sp">Power Query</span><span class="sp">Excel</span><span class="sp">Pivot Tables</span></div>
+      </div>
+      <div class="proj-foot"><a href="#" class="proj-link">View Report →</a></div>
+    </div>
+    <div class="proj-card rv">
+      <div class="proj-top"><div class="proj-ico" style="background:rgba(244,63,94,0.1)">📡</div><span class="pbadge pr">Research</span></div>
+      <div class="proj-body">
+        <div class="proj-title">RIS Wireless Communication</div>
+        <div class="proj-desc">Published research on Wireless Communication Through Reconfigurable Intelligent Surface — next-generation systems where surfaces can be intelligently configured to control signal propagation environments.</div>
+        <div class="proj-stack"><span class="sp">Research</span><span class="sp">Published Paper</span><span class="sp">Wireless Systems</span></div>
+      </div>
+      <div class="proj-foot"><a href="#" class="proj-link">Read Paper →</a></div>
+    </div>
+    <div class="proj-card rv">
+      <div class="proj-top"><div class="proj-ico" style="background:rgba(168,85,247,0.12)">🎓</div><span class="pbadge ppu">Training</span></div>
+      <div class="proj-body">
+        <div class="proj-title">PL-300 Course Curriculum</div>
+        <div class="proj-desc">Full Power BI training curriculum aligned to PL-300. Includes 10+ real case studies, hands-on RLS labs, incremental refresh walkthroughs, and Service deployment guides — used to train 50+ professionals.</div>
+        <div class="proj-stack"><span class="sp">Curriculum Design</span><span class="sp">PL-300</span><span class="sp">Power BI</span><span class="sp">DAX</span></div>
+      </div>
+      <div class="proj-foot"><a href="#" class="proj-link">Learn More →</a></div>
+    </div>
+  </div>
+</section>
+
+<!-- CERTIFICATIONS -->
+<section id="certifications" class="dark">
+  <p class="eyebrow rv">Credentials</p>
+  <h2 class="sec-title rv">Certifi<em>cations</em></h2>
+  <div class="certs-grid">
+    <div class="cert-card rv">
+      <div class="cert-badge-ico">🏅</div>
+      <div><p class="cert-iss">Microsoft</p><h4 class="cert-name">Power BI Data Analyst Associate (PL-300)</h4><p class="cert-info">Industry benchmark for Power BI professionals. Covers data modeling, DAX, Power Query, RLS, and Power BI Service deployment.</p></div>
+    </div>
+    <div class="cert-card rv">
+      <div class="cert-badge-ico">📜</div>
+      <div><p class="cert-iss">Coursera · Microsoft</p><h4 class="cert-name">Power BI Data Analyst Professional Certificate</h4><p class="cert-info">Full professional program covering real-world BI applications, data storytelling, and end-to-end analytics workflows.</p></div>
+    </div>
+    <div class="cert-card rv">
+      <div class="cert-badge-ico">☁️</div>
+      <div><p class="cert-iss">Amazon Web Services</p><h4 class="cert-name">AWS Certified Cloud Foundations</h4><p class="cert-info">Core AWS cloud knowledge including services, architecture, security fundamentals, and deployment models.</p></div>
+    </div>
+    <div class="cert-card rv">
+      <div class="cert-badge-ico">📄</div>
+      <div><p class="cert-iss">Academic Publication</p><h4 class="cert-name">Wireless Communication Through RIS</h4><p class="cert-info">Published research on Reconfigurable Intelligent Surface technology for next-generation wireless communication.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<section id="education" class="light">
+  <p class="eyebrow rv">Background</p>
+  <h2 class="sec-title rv">Edu<em>cation</em></h2>
+  <div class="edu-grid">
+    <div class="edu-card rv">
+      <p class="edu-yr">2020 — 2024</p>
+      <h3 class="edu-deg">B.Tech — Artificial Intelligence &amp; Data Science</h3>
+      <p class="edu-school">Dhanalakshmi Srinivasan College of Engineering, Coimbatore, Tamil Nadu</p>
+    </div>
+    <div class="edu-card rv">
+      <p class="edu-yr">2020</p>
+      <h3 class="edu-deg">Higher Secondary Education (HSC)</h3>
+      <p class="edu-school">The Richmond Matric Higher Secondary School, Perundurai, Tamil Nadu</p>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <p class="eyebrow rv" style="justify-content:center">Contact</p>
+  <h2 class="sec-title rv" style="text-align:center;margin-bottom:0">Let's <em>Connect</em></h2>
+  <p class="contact-sub rv">I'm actively seeking Power BI Developer and Data Analyst roles.<br>If you're hiring or want to collaborate — reach out.</p>
+  <div class="contact-grid">
+    <a href="tel:+917604825587" class="c-card rv"><span class="c-ico">📞</span><h4>Call Me</h4><p>+91 76048 25587</p></a>
+    <a href="mailto:chandrus0131@gmail.com" class="c-card rv"><span class="c-ico">✉️</span><h4>Email Me</h4><p>chandrus0131@gmail.com</p></a>
+    <a href="https://linkedin.com/in/chandru-s-1b21bb228" target="_blank" class="c-card rv"><span class="c-ico">💼</span><h4>LinkedIn</h4><p>linkedin.com/in/chandru-s</p></a>
+  </div>
+  <div class="cta-row rv">
+    <a href="mailto:chandrus0131@gmail.com" class="btn-p">📧 Hire Me</a>
+    <a href="https://linkedin.com/in/chandru-s-1b21bb228" target="_blank" class="btn-s">LinkedIn →</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <span>© 2025 Chandru S · Power BI Developer &amp; Data Analyst · Coimbatore</span>
+  <span class="fl">chandrus0131@gmail.com</span>
+</footer>
+
+<script>
+// Nav shrink on scroll
+window.addEventListener('scroll',function(){
+  document.querySelector('nav').style.padding=window.scrollY>60?'12px 48px':'18px 48px';
+});
+
+// Scroll reveal
+var obs=new IntersectionObserver(function(entries){
+  entries.forEach(function(e,i){
+    if(e.isIntersecting){
+      setTimeout(function(){e.target.classList.add('on');},i*60);
+      obs.unobserve(e.target);
+    }
+  });
+},{threshold:0.1});
+document.querySelectorAll('.rv').forEach(function(el){obs.observe(el);});
+
+// KPI counters
+function count(id,end,sfx,ms){
+  var el=document.getElementById(id),s=null;
+  function step(t){
+    if(!s)s=t;
+    var p=Math.min((t-s)/ms,1),ease=1-Math.pow(1-p,3);
+    el.textContent=Math.round(ease*end)+sfx;
+    if(p<1)requestAnimationFrame(step);
+  }
+  requestAnimationFrame(step);
+}
+var done=false;
+window.addEventListener('scroll',function(){
+  if(!done&&window.scrollY>100){
+    done=true;
+    count('s1',50,'+',1200);
+    count('s2',5,'+',1000);
+    count('s3',3,'',900);
+  }
+});
+
+// Experience tabs
+function switchExp(idx,tab){
+  document.querySelectorAll('.exp-panel').forEach(function(p){p.classList.remove('active');});
+  document.querySelectorAll('.exp-tab').forEach(function(t){t.classList.remove('active');});
+  document.getElementById('ep'+idx).classList.add('active');
+  tab.classList.add('active');
+}
+</script>
+</body>
+</html>
