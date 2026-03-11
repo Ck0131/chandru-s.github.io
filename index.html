@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Chandru S | Power BI Developer</title>
+<title>Chandru | Power BI Developer</title>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
@@ -58,6 +58,10 @@ section.dark{padding:88px 48px;background:#0b1120}
 .eyebrow::before{content:'';width:24px;height:1px;background:#3b82f6}
 .sec-title{font-family:'Bebas Neue';font-size:clamp(40px,6vw,68px);line-height:0.95;letter-spacing:-1px;margin-bottom:52px}
 .sec-title em{color:#3b82f6;font-style:normal}
+#certifications .cert-name a{color:#ffffff;text-decoration:none;transition:color .2s, transform .2s;}
+#certifications .cert-name a:hover{color:#ffffff;transform:translateY(-1px);text-decoration:none;}
+#certifications .cert-name a:focus-visible{outline:none;color:#ffffff;}
+#certifications .cert-name a:active{transform:translateY(0);}
 
 /* ABOUT */
 .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:start}
@@ -135,8 +139,9 @@ section.dark{padding:88px 48px;background:#0b1120}
 
 /* CERTS */
 .certs-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
-.cert-card{background:#111827;border:1px solid #1e2d45;border-radius:15px;padding:24px;display:flex;gap:16px;transition:border-color .3s,transform .3s}
-.cert-card:hover{border-color:rgba(16,185,129,0.4);transform:translateX(5px)}
+.cert-card{background:#111827;border:1px solid #1e2d45;border-radius:15px;padding:24px;display:flex;gap:16px;transition:border-color .3s,transform .3s,box-shadow .3s}
+.cert-card:hover{border-color:rgba(16,185,129,0.4);transform:translateX(5px);box-shadow:0 10px 25px rgba(16,185,129,0.25);}
+.cert-card:hover .cert-name a{color:#10b981;}
 .cert-badge-ico{width:50px;height:50px;border-radius:11px;background:rgba(16,185,129,0.08);display:flex;align-items:center;justify-content:center;font-size:26px;flex-shrink:0}
 .cert-iss{font-family:'JetBrains Mono';font-size:9px;color:#10b981;letter-spacing:1px;text-transform:uppercase;margin-bottom:5px}
 .cert-name{font-size:13px;font-weight:600;color:#f0f6ff;margin-bottom:5px;line-height:1.4}
@@ -187,7 +192,7 @@ footer .fl{color:#3b82f6}
 
 <!-- NAV -->
 <nav>
-  <div class="logo">Chandru S.</div>
+  <div class="logo">Chandru </div>
   <ul class="nav-links">
     <li><a href="#about">About</a></li>
     <li><a href="#skills">Skills</a></li>
@@ -205,7 +210,6 @@ footer .fl{color:#3b82f6}
     <div class="hero-chip"><span class="chip-dot"></span>Open to IT Roles — Coimbatore</div>
     <h1>
       <span class="c1">CHAN</span><span class="c2">DRU</span><br>
-      <span class="c3">S.</span>
     </h1>
     <p class="hero-role">// Power BI Developer &amp; Data Analyst</p>
     <p class="hero-bio">
@@ -421,19 +425,19 @@ footer .fl{color:#3b82f6}
   <div class="certs-grid">
     <div class="cert-card rv">
       <div class="cert-badge-ico">🏅</div>
-      <div><p class="cert-iss">Microsoft</p><h4 class="cert-name">Power BI Data Analyst Associate (PL-300)</h4><p class="cert-info">Industry benchmark for Power BI professionals. Covers data modeling, DAX, Power Query, RLS, and Power BI Service deployment.</p></div>
+      <div><p class="cert-iss">Microsoft</p><h4 class="cert-name"><a href="https://learn.microsoft.com/en-in/users/chandrus-5203/credentials/513862a7377032b2?ref=https%3A%2F%2Fwww.linkedin.com%2F" target="_blank" rel="noopener noreferrer">Power BI Data Analyst Associate (PL-300)</a></h4><p class="cert-info">Industry benchmark for Power BI professionals. Covers data modeling, DAX, Power Query, RLS, and Power BI Service deployment.</p></div>
     </div>
     <div class="cert-card rv">
       <div class="cert-badge-ico">📜</div>
-      <div><p class="cert-iss">Coursera · Microsoft</p><h4 class="cert-name">Power BI Data Analyst Professional Certificate</h4><p class="cert-info">Full professional program covering real-world BI applications, data storytelling, and end-to-end analytics workflows.</p></div>
+      <div><p class="cert-iss">Coursera · Microsoft</p><h4 class="cert-name"><a href="https://www.credly.com/badges/a7d282bd-256e-4577-999e-c2ebafe1e13f/linked_in_profile" target="_blank" rel="noopener noreferrer">Power BI Data Analyst Professional Certificate</a></h4><p class="cert-info">Full professional program covering real-world BI applications, data storytelling, and end-to-end analytics workflows.</p></div>
     </div>
     <div class="cert-card rv">
       <div class="cert-badge-ico">☁️</div>
-      <div><p class="cert-iss">Amazon Web Services</p><h4 class="cert-name">AWS Certified Cloud Foundations</h4><p class="cert-info">Core AWS cloud knowledge including services, architecture, security fundamentals, and deployment models.</p></div>
+      <div><p class="cert-iss">Amazon Web Services</p><h4 class="cert-name"><a href="https://www.credly.com/badges/0c162f78-8d8e-439f-b93a-3dad80d4abf1/linked_in_profile" target="_blank" rel="noopener noreferrer">AWS Certified Cloud Foundations</a></h4><p class="cert-info">Core AWS cloud knowledge including services, architecture, security fundamentals, and deployment models.</p></div>
     </div>
     <div class="cert-card rv">
       <div class="cert-badge-ico">📄</div>
-      <div><p class="cert-iss">Academic Publication</p><h4 class="cert-name">Wireless Communication Through RIS</h4><p class="cert-info">Published research on Reconfigurable Intelligent Surface technology for next-generation wireless communication.</p></div>
+      <div><p class="cert-iss">Academic Publication</p><h4 class="cert-name"><a href="https://www.studocu.com/in/document/dhanalakshmi-srinivasan-university/computer-networks/wireless-communications-through-rsi-full-paper/92838718" target="_blank" rel="noopener noreferrer">Wireless Communication Through RIS</a></h4><p class="cert-info">Published research on Reconfigurable Intelligent Surface technology for next-generation wireless communication.</p></div>
     </div>
   </div>
 </section>
