@@ -24,6 +24,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
 /* HERO */
 #hero{min-height:100vh;display:flex;align-items:center;padding:100px 48px 60px;position:relative;overflow:hidden}
 #hero::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(90deg,transparent,transparent 59px,rgba(59,130,246,0.04) 60px),repeating-linear-gradient(0deg,transparent,transparent 59px,rgba(59,130,246,0.04) 60px)}
+#bg-canvas{position:absolute;inset:0;width:100%;height:100%;z-index:0;pointer-events:none}
 .hero-inner{max-width:900px;position:relative;z-index:1}
 .hero-chip{display:inline-flex;align-items:center;gap:8px;padding:6px 16px;border-radius:100px;border:1px solid rgba(16,185,129,0.4);background:rgba(16,185,129,0.08);font-family:'JetBrains Mono';font-size:10px;letter-spacing:2px;color:#10b981;text-transform:uppercase;margin-bottom:32px}
 .chip-dot{width:7px;height:7px;border-radius:50%;background:#10b981;animation:blink 1.8s ease-in-out infinite}
@@ -206,6 +207,7 @@ footer .fl{color:#3b82f6}
 
 <!-- HERO -->
 <section id="hero">
+  <canvas id="bg-canvas"></canvas>
   <div class="hero-inner">
     <div class="hero-chip"><span class="chip-dot"></span>Open to IT Roles — Coimbatore</div>
     <h1>
@@ -527,6 +529,167 @@ function switchExp(idx,tab){
   document.getElementById('ep'+idx).classList.add('active');
   tab.classList.add('active');
 }
+
+// Analyst cursor-reactive network animation (second theme)
+(function(){
+  const canvas = document.getElementById('bg-canvas');
+  if(!canvas) return;
+  const ctx = canvas.getContext('2d');
+  let w = canvas.width = window.innerWidth;
+  let h = canvas.height = window.innerHeight;
+
+  const nodes = [];
+  const nodeCount = Math.max(65, Math.min(120, Math.floor((w * h) / 75000)));
+  const mouse = { x: w/2, y: h/2, active: false, dragging: false };
+  const dragTrail = [];
+
+  function initNodes(){
+    nodes.length = 0;
+    for(let i=0;i<nodeCount;i++){
+      nodes.push({
+        x: Math.random()*w,
+        y: Math.random()*h,
+        vx: (Math.random()-0.5)*0.4,
+        vy: (Math.random()-0.5)*0.4,
+        r: 1.1 + Math.random()*2.2,
+        phase: Math.random()*Math.PI*2
+      });
+    }
+  }
+  initNodes();
+
+  window.addEventListener('resize', ()=>{
+    w = canvas.width = window.innerWidth;
+    h = canvas.height = window.innerHeight;
+    nodes.forEach(n => { n.x = Math.min(w, n.x); n.y = Math.min(h, n.y); });
+  });
+
+  canvas.addEventListener('mousemove', e => {
+    mouse.x = e.clientX;
+    mouse.y = e.clientY;
+    mouse.active = true;
+    if(mouse.dragging){
+      dragTrail.push({x:mouse.x,y:mouse.y,t:Date.now()});
+      if(dragTrail.length>35) dragTrail.shift();
+    }
+  });
+  canvas.addEventListener('mouseleave', ()=>mouse.active=false);
+  canvas.addEventListener('mouseenter', e=>{mouse.x=e.clientX;mouse.y=e.clientY;mouse.active=true;});
+  canvas.addEventListener('mousedown', ()=>mouse.dragging=true);
+  document.addEventListener('mouseup', ()=>mouse.dragging=false);
+
+  function updateNodes(){
+    nodes.forEach(n=>{
+      n.x += n.vx; n.y += n.vy;
+      n.phase += 0.03;
+      if(n.x<0||n.x>w) n.vx *= -1;
+      if(n.y<0||n.y>h) n.vy *= -1;
+
+      if(mouse.active){
+        const dx=n.x-mouse.x, dy=n.y-mouse.y;
+        const dist=Math.hypot(dx,dy);
+        if(dist<130){
+          const pull=(130-dist)*0.0006;
+          n.vx += (dx/dist)*pull;
+          n.vy += (dy/dist)*pull;
+        }
+      }
+    });
+  }
+
+  function drawNodes(){
+    nodes.forEach(n=>{
+      const glow=0.25+0.6*((Math.sin(n.phase)+1)/2);
+      ctx.beginPath();
+      ctx.arc(n.x,n.y,n.r,0,Math.PI*2);
+      ctx.fillStyle=`rgba(58,207,247,${0.2+glow*0.5})`;
+      ctx.shadowColor='rgba(82,238,255,0.65)';
+      ctx.shadowBlur=8*glow;
+      ctx.fill();
+      ctx.shadowBlur=0;
+    });
+  }
+
+  function drawConnections(){
+    for(let i=0;i<nodes.length;i++){
+      const a=nodes[i];
+      for(let j=i+1;j<nodes.length;j++){
+        const b=nodes[j];
+        const d=Math.hypot(a.x-b.x,a.y-b.y);
+        if(d<150){
+          ctx.strokeStyle=`rgba(58,230,255,${0.16*(1-d/150)})`;
+          ctx.lineWidth=1;
+          ctx.beginPath();
+          ctx.moveTo(a.x,a.y);
+          ctx.lineTo(b.x,b.y);
+          ctx.stroke();
+        }
+      }
+      if(mouse.active){
+        const md=Math.hypot(a.x-mouse.x,a.y-mouse.y);
+        if(md<190){
+          ctx.strokeStyle=`rgba(61,224,255,${0.22*(1-md/190)})`;
+          ctx.lineWidth=1;
+          ctx.beginPath();
+          ctx.moveTo(a.x,a.y);
+          ctx.lineTo(mouse.x,mouse.y);
+          ctx.stroke();
+        }
+      }
+    }
+  }
+
+  function drawTrail(){
+    if(!dragTrail.length) return;
+    const now=Date.now();
+    ctx.lineWidth=2;
+    for(let i=1;i<dragTrail.length;i++){
+      const p1=dragTrail[i-1];
+      const p2=dragTrail[i];
+      const alpha=Math.max(0,1-(now-p2.t)/600);
+      ctx.strokeStyle=`rgba(0,255,215,${alpha*0.9})`;
+      ctx.beginPath();
+      ctx.moveTo(p1.x,p1.y);
+      ctx.lineTo(p2.x,p2.y);
+      ctx.stroke();
+    }
+  }
+
+  function drawCursor(){
+    if(!mouse.active) return;
+    const outer=mouse.dragging?30:22;
+    const inner=mouse.dragging?14:12;
+    const op=mouse.dragging?0.85:0.6;
+    ctx.beginPath();
+    ctx.arc(mouse.x,mouse.y,inner,0,Math.PI*2);
+    ctx.strokeStyle=`rgba(0,215,255,${op})`;
+    ctx.lineWidth=2.2;
+    ctx.stroke();
+    ctx.beginPath();
+    ctx.arc(mouse.x,mouse.y,outer,0,Math.PI*2);
+    ctx.strokeStyle=`rgba(0,215,255,${op*0.4})`;
+    ctx.lineWidth=1.2;
+    ctx.stroke();
+    if(mouse.dragging){
+      ctx.beginPath();
+      ctx.arc(mouse.x,mouse.y,8,0,Math.PI*2);
+      ctx.fillStyle='rgba(0,255,214,0.4)';
+      ctx.fill();
+    }
+  }
+
+  function animate(t=0){
+    ctx.clearRect(0,0,w,h);
+    updateNodes();
+    drawConnections();
+    drawNodes();
+    drawTrail();
+    drawCursor();
+    requestAnimationFrame(animate);
+  }
+
+  animate();
+})();
 </script>
 </body>
 </html>
