@@ -2041,7 +2041,7 @@
 
   <section id="projects">
     <p class="ey rv">Projects</p>
-    <h2 class="st rv">Coming <em>Soon</em></h2>
+    <h2 class="st rv">Projects <em>Showcase</em></h2>
     <div class="pjg">
       <div class="pj rv">
         <div class="pjbar" style="background:linear-gradient(90deg,var(--purple),var(--fuchsia))"></div>
@@ -2049,13 +2049,14 @@
           <div class="pjico" style="background:rgba(124,58,237,0.1)">📊</div><span class="pb pb1">Power BI</span>
         </div>
         <div class="pjbody">
-          <div class="pjtitle">Sales Performance Dashboard</div>
+          <div class="pjtitle">Supply chain Analysis</div>
           <div class="pjdesc">End-to-end analytics covering $22M+ in transactions across 6 countries and 5,000+ records.
             YTD, MoM growth, profit margin %, and RANKX-based ranking with Row-Level Security.</div>
           <div class="pjstack"><span class="sp">Power BI</span><span class="sp">DAX</span><span class="sp">Power
               Query</span><span class="sp">SQL Server</span><span class="sp">RLS</span></div>
         </div>
-        <div class="pjfoot"><a href="#" class="plnk">View Dashboard →</a></div>
+        <div class="pjfoot"><a href="https://github.com/Ck0131/Supply-Chain-Analysis" target="_blank" class="plnk">View
+            Project →</a></div>
       </div>
       <div class="pj rv d1">
         <div class="pjbar" style="background:linear-gradient(90deg,var(--pink),var(--rose))"></div>
@@ -2338,7 +2339,7 @@
       const x = (e.clientX / W - .5) * 22, y = (e.clientY / H - .5) * 22;
       document.querySelectorAll('.blob').forEach((b, i) => {
         const f = [.24, .17, .33][i] || .2;
-        b.style.transform = `translate(${x * f}px,${y * f}px)`;
+        b.style.translate = `${x * f}px ${y * f}px`;
       });
     });
   </script>
