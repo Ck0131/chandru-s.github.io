@@ -219,8 +219,8 @@ const HeroSection = () => {
       <div className="overflow-hidden w-full mt-6 sm:mt-4 md:-mt-5">
         <FadeIn delay={0.15} y={40}>
           <h1
-            className="hero-heading font-black uppercase tracking-tight leading-none whitespace-nowrap w-full text-center"
-            style={{ fontSize: 'clamp(3.5rem, 14vw, 17.5vw)' }}
+            className="hero-heading font-black uppercase tracking-tight leading-none w-full text-center"
+            style={{ fontSize: 'clamp(2.8rem, 11.5vw, 17.5vw)' }}
           >
             Hi, i&apos;m chandru
           </h1>
