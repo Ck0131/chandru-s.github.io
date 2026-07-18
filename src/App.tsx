@@ -227,12 +227,12 @@ const HeroSection = () => {
         </FadeIn>
       </div>
 
-      <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-10">
+      <div className="absolute inset-0 flex items-center justify-center translate-y-6 sm:translate-y-10 pointer-events-none z-10">
         <div className="pointer-events-auto">
           <FadeIn delay={0.6} y={30}>
             <Magnet padding={150} strength={3}>
               <div className="relative">
-                <div className="relative w-[280px] sm:w-[360px] md:w-[440px] lg:w-[520px]">
+                <div className="relative w-[220px] sm:w-[280px] md:w-[360px] lg:w-[420px]">
                   {/* 3D Logo Ring Effect */}
                   <div className="absolute inset-0 rounded-full border-4 border-[#B600A8]/20 animate-pulse" />
                   <div className="absolute -inset-4 rounded-full border-2 border-[#7621B0]/15" />
